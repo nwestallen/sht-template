@@ -9,16 +9,17 @@
   "A component which greets a user."
   [{:keys [name]}]
   ;; use helix.dom to create DOM elements
-  (d/div "Hello, " (d/strong name) "!"))
+  (d/div {:class-name "px-5"}"Hello, " (d/strong name) "!"))
 
 (defnc app []
   {:helix/features {:fast-refresh true}}
   (let [[state set-state] (hooks/use-state {:name "Helix User"})]
     (d/div
-     (d/h1 "Welcome!")
+     (d/h1 {:class-name "text-4xl font-bold p-5"} "Welcome!")
      ;; create elements out of components
      ($ greeting {:name (:name state)})
-     (d/input {:value (:name state)
+     (d/input {:class-name "mx-5 my-1 border border-black"
+               :value (:name state)
                :on-change #(set-state assoc :name (.. % -target -value))}))))
 
 ;; start your app with your favorite React renderer
